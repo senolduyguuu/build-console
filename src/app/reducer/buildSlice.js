@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -15,10 +16,7 @@ export const buildSlice = createSlice({
 		addLog: (state, action) => {
 			state.logs.push(action.payload);
 			state.currentIndex += 1;
-			state.progress = (state.currentIndex / mockLogs.length) * 100;
-		},
-		togglePause: (state) => {
-			state.paused = !state.paused;
+			state.progress = (state.currentIndex / 6) * 100;
 		},
 		completeBuild: (state) => {
 			state.completed = true;
@@ -33,20 +31,34 @@ export const buildSlice = createSlice({
 	},
 });
 
-export const { addLog, togglePause, completeBuild, resetBuild } = buildSlice.actions;
+export const { addLog, completeBuild, resetBuild } = buildSlice.actions;
 
 export const selectLogs = (state) => state.build.logs;
-export const selectProgress = (state) => state.build.progress;
-export const selectPaused = (state) => state.build.paused;
 export const selectCompleted = (state) => state.build.completed;
 
 export default buildSlice.reducer;
 
-const mockLogs = [
-	"Initializing build environment...",
-	"Fetching dependencies...",
-	"Building project...",
-	"Running tests...",
-	"Deployment in progress...",
-	"Build successful!",
-];
+// Log oluşturma fonksiyonu
+export const generateLog = () => {
+	const currentTime = new Date().toLocaleTimeString();
+	return {
+		time: currentTime,
+		type: faker.helpers.arrayElement(["stderr", "stdout"]),
+		message: faker.hacker.phrase(),
+		error: faker.datatype.boolean(),
+		details: faker.lorem.sentence(),
+	};
+};
+
+// Logları kopyalama fonksiyonu
+export const copyLogToClipboard = (log) => {
+	const logText = `${log.time}: ${log.message}\nDetails: ${log.details}`;
+	if (!navigator.clipboard) {
+		alert("Clipboard API not supported by your browser");
+		return;
+	}
+
+	navigator.clipboard.writeText(logText)
+		.then(() => alert("Log copied to clipboard!"))
+		.catch(err => alert("Failed to copy log: " + err));
+};

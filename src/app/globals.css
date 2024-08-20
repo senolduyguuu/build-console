@@ -1,33 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #1e1e1e;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.log-container {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 400px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.log-entry {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #00ff00;
+}
+
+.log-entry.error {
+  color: #ff5555;
+}
+
+.time-stamp {
+  color: #808080;
+  margin-right: 8px;
+}
+
+.stderr-label {
+  color: #ff5555;
+  margin-right: 8px;
 }
