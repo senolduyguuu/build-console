@@ -37,14 +37,11 @@ export default function BuildLog() {
 			return () => clearTimeout(timeout);
 		}
 	}, [currentLogIndex, dispatch]);
-
-	// Logları yeniden yükleme işlevi
 	const handleReloadLogs = () => {
 		dispatch(resetBuild());
 		setCurrentLogIndex(0);
 	};
 
-	// Tüm logları panoya kopyalama işlevi
 	const handleCopyAllLogs = () => {
 		const allLogsText = logs.map(log => `${log.time}: ${log.message}\nDetails: ${log.details}`).join('\n\n');
 		if (navigator.clipboard) {
@@ -56,7 +53,6 @@ export default function BuildLog() {
 		}
 	};
 
-	// Tüm logları bir dosya olarak indirme işlevi
 	const handleDownloadLogs = () => {
 		const allLogsText = logs.map(log => `${log.time}: ${log.message}\nDetails: ${log.details}`).join('\n\n');
 		const blob = new Blob([allLogsText], { type: 'text/plain' });
@@ -68,30 +64,27 @@ export default function BuildLog() {
 		URL.revokeObjectURL(url);
 	};
 
-	// Logları temizleme işlevi
 	const handleClearLogs = () => {
 		dispatch(resetBuild());
 		setCurrentLogIndex(0);
 	};
-
-	// İlerleme yüzdesi hesaplama
 	const progress = (currentLogIndex / 6) * 100;
 
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px', backgroundColor: '#1e1e1e', minHeight: '100vh' }}>
-			{!completed && <BuildLogOwerview />}
 			{!completed && (
 				<Card sx={{ width: '100%', maxWidth: 770, backgroundColor: '#2c2c2c', color: '#fff', boxShadow: 'none' }}>
+					<Box sx={{ padding: '16px' }}>
+						<BuildLogOwerview />
+					</Box>
 					<CardContent>
 						<Typography variant="h6" gutterBottom>
 							Build Logs
 						</Typography>
 						<Divider sx={{ backgroundColor: '#3a3a3a', marginBottom: '10px' }} />
-						{/* Durum Metni */}
 						<Typography variant="body1" sx={{ color: '#00ff00', mb: 2 }}>
 							{logStages[currentLogIndex] || "Build Completed"}
 						</Typography>
-						{/* Loglar */}
 						<Box className="log-container" sx={{ maxHeight: 200, overflowY: 'auto' }}>
 							{logs.map((log, index) => (
 								<Box key={index} sx={{ display: 'flex', flexDirection: 'column', marginBottom: '8px' }}>
@@ -108,7 +101,6 @@ export default function BuildLog() {
 								</Box>
 							))}
 						</Box>
-						{/* İlerleme Çubuğu ve Yüzde */}
 						<Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
 							<LinearProgress variant="determinate" value={progress} sx={{ width: '100%', mr: 2 }} />
 							<Typography variant="body2" sx={{ color: '#00ff00' }}>{Math.round(progress)}%</Typography>

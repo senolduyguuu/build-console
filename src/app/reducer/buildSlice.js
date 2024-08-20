@@ -38,7 +38,7 @@ export const selectCompleted = (state) => state.build.completed;
 
 export default buildSlice.reducer;
 
-// Log oluşturma fonksiyonu
+
 export const generateLog = () => {
 	const currentTime = new Date().toLocaleTimeString();
 	return {
@@ -50,7 +50,6 @@ export const generateLog = () => {
 	};
 };
 
-// Logları kopyalama fonksiyonu
 export const copyLogToClipboard = (log) => {
 	const logText = `${log.time}: ${log.message}\nDetails: ${log.details}`;
 	if (!navigator.clipboard) {

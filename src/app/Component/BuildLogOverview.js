@@ -12,7 +12,6 @@ export default function BuildLogOwerview() {
 		setExpanded(!expanded);
 	};
 
-	// Kopyalama işlevi
 	const handleCopyText = (text) => {
 		if (!navigator.clipboard) {
 			alert('Clipboard API not supported by your browser');
@@ -24,7 +23,7 @@ export default function BuildLogOwerview() {
 	};
 
 	return (
-		<Box sx={{ width: '100%', maxWidth: 770, bgcolor: '#2c2c2c', color: '#fff', padding: '10px' }}>
+		<div >
 			<Typography variant="h6" sx={{ mb: 2 }}>
 				Overview
 			</Typography>
@@ -76,6 +75,6 @@ export default function BuildLogOwerview() {
 					</Typography>
 				</Box>
 			</Collapse>
-		</Box>
+		</div>
 	);
 }
