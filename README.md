@@ -13,6 +13,7 @@ Make sure you have the following installed:
 
 1. Clone the repository:
 
+<<<<<<< HEAD
    ```bash
    git clone <repository-url>
    ```
@@ -30,6 +31,25 @@ Make sure you have the following installed:
    ```
 
    Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+=======
+    ```bash
+    git clone <repository-url>
+    ```
+
+2. Install the dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Run the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+>>>>>>> 07c648cfc95e9f804e86cefa43dabf618489bbfa
 
 ## Available Scripts
 
@@ -65,4 +85,7 @@ This project uses **Cypress** for end-to-end testing. To run the tests, use the 
 
 ```bash
 npm run cypress:open
+<<<<<<< HEAD
 ```
+=======
+>>>>>>> 07c648cfc95e9f804e86cefa43dabf618489bbfa
